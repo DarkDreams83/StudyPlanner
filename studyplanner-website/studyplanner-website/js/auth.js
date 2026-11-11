@@ -72,7 +72,19 @@
 
   function addAppScript() {
     const script = document.createElement("script");
-    script.src = "js/app.js";
+    const isViteDevServer =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+    const isFilePreview = window.location.protocol === "file:";
+    script.type = isViteDevServer || !isFilePreview ? "module" : "text/javascript";
+    script.src = isViteDevServer ? "/src/main.jsx" : "js/app.js";
+    if (!isViteDevServer && !document.querySelector('link[data-planner-styles]')) {
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = "js/app.css";
+      stylesheet.dataset.plannerStyles = "true";
+      document.head.appendChild(stylesheet);
+    }
     script.onerror = () => {
       appStarted = false;
       showAuth("The planner could not be loaded. Refresh the page to try again.");
