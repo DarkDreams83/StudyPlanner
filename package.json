@@ -1,0 +1,21 @@
+{
+  "name": "studyplanner-capstone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A responsive React study planner for organizing student tasks and deadlines.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
