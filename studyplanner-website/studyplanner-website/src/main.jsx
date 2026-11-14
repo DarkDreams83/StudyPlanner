@@ -7,7 +7,7 @@ import App from "./App.jsx";
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
-  throw new Error("StudyPlanner could not find its root element.");
+  throw new Error("StudySprout could not find its root element.");
 }
 
 createRoot(rootElement).render(

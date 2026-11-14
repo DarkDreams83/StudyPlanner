@@ -96,7 +96,7 @@
     const bar = document.createElement("div");
     bar.className = "auth-account-bar";
     const label = document.createElement("span");
-    label.textContent = account ? `Signed in as ${account.name}` : "Using StudyPlanner as a guest";
+    label.textContent = account ? `Signed in as ${account.name}` : "Using StudySprout as a guest";
 
     const actions = document.createElement("div");
     actions.className = "auth-account-actions";
@@ -143,7 +143,7 @@
     authRoot.innerHTML = `
       <main class="auth-page">
         <section class="auth-card" aria-labelledby="auth-title">
-          <p class="auth-brand">StudyPlanner</p>
+          <p class="auth-brand">StudySprout</p>
           <h1 id="auth-title">Your study space</h1>
           <p class="auth-intro">Sign in to keep your study tasks in your own account, or create a new account to get started.</p>
           <div class="auth-tabs" role="tablist" aria-label="Account options">

@@ -6,15 +6,15 @@ const LINKS = [
   { href: "#/dashboard", label: "Dashboard", route: "/dashboard" },
 ];
 
-export default function Navigation({ currentRoute }) {
+export default function Navigation({ currentRoute, theme, onThemeChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="site-header">
       <nav className="container navbar navbar-expand-md" aria-label="Main navigation">
-        <a className="navbar-brand brand-mark" href="#/" aria-label="StudyPlanner home">
+        <a className="navbar-brand brand-mark" href="#/" aria-label="StudySprout home">
           <span className="brand-icon" aria-hidden="true">S</span>
-          StudyPlanner
+          StudySprout
         </a>
         <button
           className="navbar-toggler"
@@ -40,6 +40,17 @@ export default function Navigation({ currentRoute }) {
                 </a>
               </li>
             ))}
+            <li className="nav-item">
+              <button
+                className="theme-toggle nav-link"
+                type="button"
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                onClick={onThemeChange}
+              >
+                <span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
+                {theme === "dark" ? "Light mode" : "Dark mode"}
+              </button>
+            </li>
           </ul>
         </div>
       </nav>

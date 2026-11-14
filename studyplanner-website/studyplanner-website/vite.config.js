@@ -14,7 +14,7 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: fileURLToPath(new URL("./src/main.jsx", import.meta.url)),
-      name: "StudyPlanner",
+      name: "StudySprout",
       formats: ["es"],
       fileName: () => "app.js",
       cssFileName: "app",

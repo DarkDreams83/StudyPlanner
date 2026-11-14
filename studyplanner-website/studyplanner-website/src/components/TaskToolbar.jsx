@@ -1,4 +1,24 @@
-export default function TaskToolbar({ tasks, subjects, filters, onChange }) {
+import { useRef } from "react";
+
+export default function TaskToolbar({
+  tasks,
+  visibleTaskCount,
+  subjects,
+  filters,
+  disabled,
+  onChange,
+  onClearFilters,
+  onExport,
+  onExportImage,
+  onImport,
+}) {
+  const importInput = useRef(null);
+  const hasActiveFilters =
+    filters.query.trim() ||
+    filters.subject !== "All" ||
+    filters.status !== "All" ||
+    filters.sort !== "due";
+
   function updateFilter(event) {
     const { name, value } = event.target;
     onChange((current) => ({ ...current, [name]: value }));
@@ -9,7 +29,46 @@ export default function TaskToolbar({ tasks, subjects, filters, onChange }) {
       <div className="task-toolbar-heading">
         <div>
           <p className="eyebrow">YOUR WORKLOAD</p>
-          <h2>Tasks <span className="task-count">{tasks.length}</span></h2>
+          <h2>
+            Tasks <span className="task-count">{visibleTaskCount}</span>
+            {visibleTaskCount !== tasks.length && (
+              <span className="task-count-context">of {tasks.length}</span>
+            )}
+          </h2>
+        </div>
+        <div className="task-toolbar-actions">
+          <input
+            ref={importInput}
+            className="import-backup-input"
+            type="file"
+            accept=".json,application/json"
+            aria-label="Choose a StudySprout backup file"
+            onChange={onImport}
+          />
+          <button
+            className="btn btn-sm btn-outline-secondary export-button"
+            type="button"
+            onClick={() => importInput.current?.click()}
+            disabled={disabled}
+          >
+            Restore backup
+          </button>
+          <button
+            className="btn btn-sm btn-outline-secondary export-button"
+            type="button"
+            onClick={onExport}
+            disabled={!tasks.length}
+          >
+            Export backup
+          </button>
+          <button
+            className="btn btn-sm btn-outline-secondary export-button"
+            type="button"
+            onClick={onExportImage}
+            disabled={!visibleTaskCount}
+          >
+            Export image
+          </button>
         </div>
       </div>
       <div className="row g-2">
@@ -66,6 +125,17 @@ export default function TaskToolbar({ tasks, subjects, filters, onChange }) {
             <option value="priority">Sort: Priority</option>
           </select>
         </div>
+        {hasActiveFilters && (
+          <div className="col-12">
+            <button
+              className="btn btn-sm btn-link clear-filters"
+              type="button"
+              onClick={onClearFilters}
+            >
+              Reset view
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

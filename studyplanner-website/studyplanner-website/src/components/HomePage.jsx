@@ -6,7 +6,7 @@ export default function HomePage({ onLoadSamples, hasTasks }) {
           <p className="eyebrow">A LITTLE MORE FOCUS, EVERY DAY</p>
           <h1>Stay on top of your studies.</h1>
           <p className="hero-description">
-            StudyPlanner helps students organize deadlines, prioritize work, and
+            StudySprout helps students organize deadlines, prioritize work, and
             see progress without the last-minute scramble.
           </p>
           <div className="hero-actions">
@@ -17,19 +17,11 @@ export default function HomePage({ onLoadSamples, hasTasks }) {
             No account required. Your planner stays in this browser.
           </p>
         </div>
-        <div className="hero-card" aria-label="StudyPlanner benefits">
+        <div className="hero-card" aria-label="StudySprout benefits">
           <div className="hero-card-icon" aria-hidden="true">✓</div>
           <p className="hero-card-label">YOUR WEEK, IN VIEW</p>
           <h2>One clear next step.</h2>
           <p>Capture what's due, choose a priority, and keep moving forward.</p>
-          <div className="hero-progress">
-            <span><span className="hero-dot" /> Keep tasks organized</span>
-            <span className="hero-check" aria-hidden="true">✓</span>
-          </div>
-          <div className="hero-progress">
-            <span><span className="hero-dot" /> Celebrate steady progress</span>
-            <span className="hero-check" aria-hidden="true">✓</span>
-          </div>
         </div>
       </section>
 

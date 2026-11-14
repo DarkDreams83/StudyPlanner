@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { filterAndSortTasks, getTaskSummary, isOverdue, parseTasks } from "./tasks.js";
+import {
+  filterAndSortTasks,
+  getTaskSummary,
+  isOverdue,
+  parseTaskBackup,
+  parseTasks,
+} from "./tasks.js";
 
 const tasks = [
   { id: "1", title: "Essay", subject: "History", due: "2026-03-10", priority: "High", notes: "", done: false },
@@ -13,6 +19,36 @@ test("parseTasks accepts an empty store and rejects malformed persisted data", (
   assert.throws(() => parseTasks("{"), /valid JSON/);
   assert.throws(() => parseTasks("{}"), /list of tasks/);
   assert.throws(() => parseTasks('[{"id":"x"}]'), /missing required fields/);
+});
+
+test("parseTaskBackup validates and restores exported planner backups", () => {
+  const restored = parseTaskBackup(JSON.stringify({ version: 1, tasks }));
+  assert.deepEqual(restored.map((task) => task.id), ["1", "2", "3"]);
+  assert.throws(() => parseTaskBackup("{"), /valid JSON/);
+  assert.throws(
+    () => parseTaskBackup(JSON.stringify({ version: 2, tasks })),
+    /valid StudySprout backup/,
+  );
+  assert.throws(
+    () =>
+      parseTaskBackup(
+        JSON.stringify({
+          version: 1,
+          tasks: [tasks[0], { ...tasks[0] }],
+        }),
+      ),
+    /duplicate task IDs/,
+  );
+  assert.throws(
+    () =>
+      parseTaskBackup(
+        JSON.stringify({
+          version: 1,
+          tasks: [{ ...tasks[0], title: " " }],
+        }),
+      ),
+    /needs a title and subject/,
+  );
 });
 
 test("filterAndSortTasks searches notes and applies subject, status, and priority filters", () => {

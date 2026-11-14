@@ -1,6 +1,6 @@
-# StudyPlanner - Frontend Web Application Capstone
+# StudySprout - Frontend Web Application Capstone
 
-StudyPlanner is a responsive study-task planner for students who need one place to organize assignments, exams, and readings. It helps students capture deadlines, set priorities, find tasks, and review their progress. The app is frontend-only: planner data and locally created accounts are stored in the current browser and are not synced to a server.
+StudySprout is a responsive study-task planner for students who need one place to organize assignments, exams, and readings. It helps students capture deadlines, set priorities, find tasks, and review their progress. The app is frontend-only: planner data and locally created accounts are stored in the current browser and are not synced to a server.
 
 ## Features
 
@@ -11,6 +11,9 @@ StudyPlanner is a responsive study-task planner for students who need one place 
 - Mark tasks complete, delete tasks with confirmation, and see empty, overdue, and save-feedback states.
 - Dashboard totals, due-soon and overdue counts, overall completion, subject progress, and upcoming tasks.
 - Sample task data can be loaded explicitly from the landing page.
+- Download and restore all tasks, including completed tasks, with validated JSON backups from the planner.
+- Download the currently visible task list as a shareable PNG image.
+- Light and dark themes follow the device preference initially and remember a manual choice in this browser.
 - Optional local sign-in. Account credentials are hashed in the browser; this static app does not provide server authentication or account recovery.
 - Tasks persist in browser `localStorage` under `sp-tasks` (scoped by the existing local account flow).
 
@@ -28,7 +31,7 @@ The app is divided into reusable components: `Navigation`, `HomePage`, `TaskForm
 
 ## Requirements checklist
 
-| Capstone requirement | StudyPlanner implementation |
+| Capstone requirement | StudySprout implementation |
 | --- | --- |
 | Clear purpose, users, and problem | Helps students organize study deadlines and progress; described above and on the landing page. |
 | HTML5, CSS3, JavaScript ES6+ | `index.html`, `css/`, and `src/`. |
@@ -70,11 +73,11 @@ npm run build
 
 ### Manual verification checklist
 
-1. Open Home, Planner, and Dashboard from the navigation on desktop and a narrow/mobile viewport.
+1. Open Home, Planner, and Dashboard from the navigation on desktop and a narrow/mobile viewport; switch themes and reload to check the saved preference.
 2. Try submitting an empty task form; confirm required-field validation. Add a task and confirm it appears.
 3. Edit a task, mark it complete, and delete it; confirm the success feedback and delete confirmation.
 4. Search task title, subject, and notes; try every subject/status filter and each sort option.
-5. Reload the page and verify tasks persist; check the dashboard's totals and subject progress.
+5. Reload the page and verify tasks persist; export and restore a task backup, export the visible task list as an image, and check the dashboard's totals and subject progress.
 6. With no tasks, check the empty states and try the sample-data button.
 7. Test a due date in the past and a date within three days to verify overdue and due-soon indicators.
 
@@ -97,7 +100,7 @@ Example workflow:
 ```bash
 git init
 git add .
-git commit -m "Build StudyPlanner frontend capstone"
+git commit -m "Build StudySprout frontend capstone"
 git branch -M main
 git remote add origin https://github.com/<your-username>/<your-repository>.git
 git push -u origin main
@@ -115,4 +118,4 @@ Do not commit `node_modules/`. Include the generated lockfile after running `npm
 
 ## Acknowledgements and limitations
 
-Bootstrap is distributed under the MIT License and is installed as an npm dependency. React, React DOM, and Vite are third-party open-source dependencies listed in `package.json`. StudyPlanner uses no public API or paid service. The local sign-in is a client-side demonstration only and must not be used to protect sensitive information.
+Bootstrap is distributed under the MIT License and is installed as an npm dependency. React, React DOM, and Vite are third-party open-source dependencies listed in `package.json`. StudySprout uses no public API or paid service. The local sign-in is a client-side demonstration only and must not be used to protect sensitive information.

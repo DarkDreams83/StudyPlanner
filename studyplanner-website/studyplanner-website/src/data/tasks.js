@@ -34,6 +34,32 @@ export function parseTasks(rawValue) {
   });
 }
 
+export function parseTaskBackup(rawValue) {
+  let backup;
+  try {
+    backup = JSON.parse(rawValue);
+  } catch {
+    throw new Error("Backup file is not valid JSON.");
+  }
+
+  if (!backup || backup.version !== 1 || !Array.isArray(backup.tasks)) {
+    throw new Error("Choose a valid StudySprout backup file.");
+  }
+
+  const tasks = parseTasks(JSON.stringify(backup.tasks));
+  const ids = new Set();
+  for (const [index, task] of tasks.entries()) {
+    if (!task.title.trim() || !task.subject.trim()) {
+      throw new Error(`Backup task ${index + 1} needs a title and subject.`);
+    }
+    if (ids.has(task.id)) {
+      throw new Error("Backup contains duplicate task IDs.");
+    }
+    ids.add(task.id);
+  }
+  return tasks;
+}
+
 export function localDateString(date = new Date()) {
   return [
     date.getFullYear(),

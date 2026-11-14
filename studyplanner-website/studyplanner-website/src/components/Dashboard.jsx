@@ -1,7 +1,7 @@
 import { filterAndSortTasks } from "../data/tasks.js";
 import TaskItem from "./TaskItem.jsx";
 
-export default function Dashboard({ tasks, summary, dueSoon, onNavigateToPlanner }) {
+export default function Dashboard({ tasks, summary, dueSoon }) {
   const nextTasks = filterAndSortTasks(tasks.filter((task) => !task.done), {
     query: "",
     subject: "All",
@@ -11,16 +11,7 @@ export default function Dashboard({ tasks, summary, dueSoon, onNavigateToPlanner
 
   return (
     <>
-      <section className="page-heading dashboard-heading">
-        <div>
-          <p className="eyebrow">YOUR PROGRESS</p>
-          <h1>A clear view of your week.</h1>
-          <p>Small steps add up. Here’s where your study plan stands today.</p>
-        </div>
-        <button className="btn btn-primary" type="button" onClick={onNavigateToPlanner}>
-          Plan a task <span aria-hidden="true">→</span>
-        </button>
-      </section>
+      <h1 className="visually-hidden">Study progress</h1>
 
       <section className="stats-grid" aria-label="Task summary">
         <StatCard label="Total tasks" value={summary.total} tone="indigo" />
@@ -45,8 +36,6 @@ export default function Dashboard({ tasks, summary, dueSoon, onNavigateToPlanner
                   key={task.id}
                   task={task}
                   readOnly
-                  onEdit={onNavigateToPlanner}
-                  onDelete={onNavigateToPlanner}
                 />
               ))}
             </ul>

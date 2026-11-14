@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="StudyPlanner helps students organize assignments, prioritize deadlines, and track study progress."
+      content="StudySprout helps students organize assignments, prioritize deadlines, and track study progress."
     />
-    <meta name="theme-color" content="#4f46e5" />
-    <title>StudyPlanner | Organize your study life</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <title>StudySprout | Organize your study life</title>
     <link rel="stylesheet" href="css/auth.css" />
     <link rel="icon" href="data:," />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("sp-theme");
+        document.documentElement.dataset.theme =
+          savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+      } catch {
+        document.documentElement.dataset.theme =
+          matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.querySelector('meta[name="theme-color"]').content =
+        document.documentElement.dataset.theme === "dark" ? "#111827" : "#f7f8fc";
+    </script>
   </head>
-  <body class="bg-slate-50 text-slate-800">
+  <body>
     <div id="auth-root"></div>
     <div id="root"></div>
     <script src="js/auth.js" defer></script>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { localDateString } from "../data/tasks.js";
 
 const EMPTY_TASK = {
   title: "",
@@ -33,10 +32,6 @@ export default function TaskForm({ task, subjects, disabled, onSubmit, onCancel 
           ? "Title must be at least 3 characters."
           : "Subject is required.",
       );
-      return;
-    }
-    if (!task && values.due && values.due < localDateString()) {
-      setValidationError("Due date cannot be in the past.");
       return;
     }
     if (!form.reportValidity()) return;
